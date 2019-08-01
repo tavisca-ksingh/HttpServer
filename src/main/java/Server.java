@@ -26,12 +26,10 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void main(String[] args) {
-        Server server =new Server(5000);
+        Server server =new Server(80);
     }
-
 }
 
