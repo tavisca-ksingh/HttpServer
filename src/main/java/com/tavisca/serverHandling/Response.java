@@ -2,44 +2,47 @@ package com.tavisca.serverHandling;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.util.Base64;
 import java.util.Date;
 
-public class FileHandling {
+public class Response {
     StringBuilder HttpInfo= new StringBuilder();
-    File file ;
+    String fileName= "";
+    Socket serverclient = null;
+    BufferedOutputStream out;
+    File myFile;
 
-   public Socket serverclient = null;
-   BufferedOutputStream out;
-
+    public Response( Socket serverClient,String fileName)
     {
+        this.serverclient = serverClient;
+        this.fileName = fileName;
         try {
             out = new BufferedOutputStream(serverclient.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        myFile = new File(fileName);
     }
 
-    public String readFile(String fileName, Socket serverClient) throws IOException
-    {
-        this.serverclient= serverClient;
 
-        file = new File(fileName);
-        if(file.exists()) {
+
+    public String ShowDataOnWeb() throws IOException
+    {
+
+        if(myFile.exists()) {
             out.write(("HTTP/1.1 200 OK\r\n").getBytes());
-            DataToSentToClient(fileName);
+            generateHeader();
         }
         else{
             HttpInfo.append("HTTP/1.1 404\r\n");
-            DataToSentToClient("badFile.html");
+            this.fileName= "badFile.html";
+            generateHeader();
         }
         return HttpInfo.toString();
     }
 
-    public void DataToSentToClient(String fileName) throws IOException {
-        File myFile = new File(fileName);
+    public void generateHeader() throws IOException {
         String extension =  getExtension(fileName);
+
         out.write(("Server: Java HTTP Server/v1.0\r\n").getBytes());
         out.write(("Date: " + (new Date()).toString()+ "\r\n").getBytes());
         out.write(("Content-type: " + RequestParser.ExtensionMap.get(extension) + "\r\n" ).getBytes());
@@ -53,7 +56,7 @@ public class FileHandling {
         byte [] b= null;
         try {
             FileInputStream fin = new FileInputStream(fileName);
-             b = new byte[fin.available()];
+            b = new byte[fin.available()];
             fin.read(b);
         }
 

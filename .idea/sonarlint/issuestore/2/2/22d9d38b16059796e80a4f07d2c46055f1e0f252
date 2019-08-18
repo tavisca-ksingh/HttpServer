@@ -1,0 +1,9 @@
+
+isquid:S2095:"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(ΰά™΅όÿÿÿÿ
+xsquid:S1488H"aImmediately return this expression instead of assigning it to the temporary variable "extension".(¥αρκ
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Π—¨‘ϋÿÿÿÿ
+?squid:S1148"#Use a logger to log this exception.(€ΙΤ…ύÿÿÿÿ
+?squid:S1148@"#Use a logger to log this exception.(€ΙΤ…ύÿÿÿÿ
+psquid:S00116"SRename this field "HttpInfo" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿμΪÿÿÿÿÿ
+fsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(δ½ώ
+fsquid:S2674<"JCheck the return value of the "read" call to see how many bytes were read.(ΨΟ•ώÿÿÿÿ

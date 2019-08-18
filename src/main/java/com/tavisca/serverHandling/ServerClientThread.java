@@ -1,10 +1,13 @@
-package com.tavisca.serverHAndling;
+package com.tavisca.serverHandling;
 import java.io.*;
 import java.net.Socket;
+import java.util.logging.Level;
 
 public class ServerClientThread extends Thread {
     Socket serverClient;
     int clientNo;
+    BufferedInputStream bufferedInputStream;
+
     ServerClientThread(Socket inSocket, int counter){
         serverClient = inSocket;
         clientNo=counter;
@@ -13,39 +16,31 @@ public class ServerClientThread extends Thread {
     @Override
     public void run() {
         try {
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(serverClient.getInputStream());
-            OutputInString(bufferedInputStream);
-
-            System.out.println("Client : " + clientNo + " exit!! ");
+            bufferedInputStream = new BufferedInputStream(serverClient.getInputStream());
+            webPageProcessing(bufferedInputStream);
+           System.out.println("Thread id : " + Thread.currentThread().getId());
+           System.out.println("Client : " + clientNo + " exit!! ");
+            serverClient.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    FileHandling fileHandling=new FileHandling();
-
-    private void OutputInString(BufferedInputStream bufferedInputStream) throws IOException {
-        byte[] data = new byte[bufferedInputStream.available()];
-        bufferedInputStream.read(data);
-        String readString = new String(data);
-        String [] value = readString.split(" ");
 
 
-        if(value[1].equalsIgnoreCase("/index.html") || value[1].equals("/"))
+    private void webPageProcessing(BufferedInputStream bufferedInputStream) throws IOException {
+
+        String fileName= RequestParser.getFileName(bufferedInputStream);
+        if(fileName.equalsIgnoreCase("index.html") || fileName.equals(""))
         {
-            String header = fileHandling.readFile("index.html");
-            serverClient.getOutputStream().write(header.getBytes());
+            Response response=new Response(serverClient,"index.html");
+            response.ShowDataOnWeb();
         }
         else
         {
-            String fileName= value[1].substring(1);
-
-            String header = fileHandling.readFile(fileName);
-            System.out.println("************************");
-            System.out.println(header);
-            System.out.println("************************");
-            serverClient.getOutputStream().write(header.getBytes());
+            Response response=new Response(serverClient,fileName);
+            //  serverClient.getOutputStream().write(header.getBytes());
+            response.ShowDataOnWeb();
         }
-        serverClient.close();
-        bufferedInputStream.close();
+
     }
 }

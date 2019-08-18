@@ -1,11 +1,9 @@
-package com.tavisca.ClientServerChat;
+package com.tavisca.clientServerChat;
 
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.Buffer;
 
 public class ClientServer {
     private Socket socket = null;

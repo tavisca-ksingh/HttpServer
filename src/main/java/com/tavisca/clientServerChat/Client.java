@@ -1,4 +1,4 @@
-package com.tavisca.ClientServerChat;
+package com.tavisca.clientServerChat;
 
 import java.io.*;
 import java.net.Socket;

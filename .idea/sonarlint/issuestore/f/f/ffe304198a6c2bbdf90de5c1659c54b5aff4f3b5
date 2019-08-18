@@ -1,0 +1,9 @@
+
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ð—¨‘ûÿÿÿÿ
+?squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+gsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(è¼ŒÙþÿÿÿÿ
+_squid:UselessImportCheck"4Remove this unused import 'java.util.logging.Level'.(…µÛ¶8×üÑÐÉ-
+V
+squid:S106"9Replace this use of System.out or System.err by a logger.(Âù×»8×üÑÐÉ-
+[
+squid:S106"9Replace this use of System.out or System.err by a logger.(‘ÖÊºýÿÿÿÿ8×üÑÐÉ-
