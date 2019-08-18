@@ -47,7 +47,7 @@ pipeline {
 		echo "I am Pubishing DockerImage "
 		docker login
                     docker tag httpserver:1.1 itskrrish/httpserver
-                    docker push itskrrish/httpserver
+              
 		    '''
         	}
     	}
