@@ -36,7 +36,7 @@ pipeline {
                 sh label: '', script: '''
 			echo "I am at building stage"
 			docker build -t httpserver:1.1 .
-			docker run -d -p 8500:5000 httpserver:1.1
+			docker run -d -p 8550:5000 httpserver:1.1
 			'''
             }
         }
